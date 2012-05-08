@@ -9,7 +9,7 @@ class Main(DetailView):
     
     def get_object(queryset=None):
         #Uncomment the following line to get a new character each refresh.
-        DailyChar.objects.filter(day=date.today()).delete()
+        #DailyChar.objects.filter(day=date.today()).delete()
         if DailyChar.objects.filter(day=date.today()).count() == 0:
             numChars = Char.objects.all().count()
             char = Char.objects.get(id=int(1+random()*numChars))
