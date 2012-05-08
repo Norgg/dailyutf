@@ -4,7 +4,7 @@
 <style>
     body {text-align: center; background: #223; font-family: sans-serif;}
     #char {display: inline-block; margin: 100px auto; border: 1px solid #aaa; padding: 10px; background: #eee; border-radius: 10px; min-width: 300px;}
-    #c1 {margin: 0px auto;}
+    #c1 {display: none;}
     #c2 {display: none;}
     #error {color: red;}
     h1 {font-size: 500%;}
@@ -14,9 +14,10 @@
 <body>
     <div id="char">
         <h2>{{object.char.desc|lower}}</h2>
-        <canvas id="c1" width=128 height=128></canvas>
+        <h1>&#x{{object.char.char}};</h1>
         <div id="error"></div>
     </div>
+    <canvas id="c1" width=128 height=128></canvas>
     <canvas id="c2" width=128 height=128></canvas>
 
 <script>
