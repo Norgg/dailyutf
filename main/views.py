@@ -32,4 +32,4 @@ class CharFeed(Feed):
         return item.char.desc
 
     def item_description(self, item):
-        return item.char.desc + "<br/>&#x" + item.char.char + ";"
+        return "<p>" + item.char.desc + "<br/>&#x" + item.char.char + ";</p>"
