@@ -12,7 +12,7 @@ class Char(Model):
 
 class DailyChar(Model):
     char = ForeignKey(Char)
-    day = DateField(auto_now_add=True)
+    day = DateField(auto_now_add=True, unique=True)
     
     def get_absolute_url(self):
         return reverse('old', None, kwargs=dict(pk=self.id))
@@ -22,7 +22,7 @@ class DailyChar(Model):
         #TODO: Stop this having a race condition, tralalala.
         if DailyChar.objects.filter(day=date.today()).count() == 0:
             numChars = Char.objects.all().count()
-            char = Char.objects.get(id=int(1+random()*numChars))
+            char = Char.objects.all()[int(random()*numChars)]
             DailyChar(char=char).save()
         return DailyChar.objects.get(day=date.today())
 
