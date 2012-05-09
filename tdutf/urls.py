@@ -10,4 +10,5 @@ urlpatterns = patterns('',
     url(r'^old/(?P<pk>\d{1,10})/', Old.as_view(), name='old'),
     url(r'^feed$', CharFeed(), name='feed'),
     url(r'^json$', json, name='json'),
+    url(r'^random$', Random.as_view(), name='random'),
 )

@@ -10,6 +10,12 @@ class Main(DetailView):
     def get_object(queryset=None):
         return DailyChar.current()
 
+class Random(DetailView):
+    template_name = "main.html"
+    
+    def get_object(queryset=None):
+        return DailyChar.random()
+
 class Old(DetailView):
     template_name = "main.html"
     model = DailyChar
