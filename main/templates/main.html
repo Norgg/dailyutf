@@ -6,6 +6,27 @@
     #char-wrap {display: inline-block; margin: 100px auto; border: 1px solid #aaa; padding: 10px; background: #eee; border-radius: 10px; min-width: 300px;}
     #error {color: red;}
     h1 {font-size: 500%;}
+    #next-candidates-wrap {
+        width: 250px; 
+        position: absolute;
+        right: 20px; 
+        top: 20px; 
+    }
+    #next-candidates {
+        border: 1px solid white;
+        background: #113;
+        color: white;
+        border-radius: 5px;
+    }
+    #next-candidates a {text-decoration: none;}
+    .candidate {
+        margin: 5px auto;
+        border: 2px solid #ccc;
+        background: #bbb;
+        width: 50px;
+        font-size: 200%;
+        color: #000022;
+    }
 </style>
 <link rel="alternate" type="application/rss+xml" title="The Daily UTF RSS" href="{% url feed %}"/>
 
@@ -23,6 +44,22 @@
 </script>
 </head>
 <body>
+    {% if candidates %}
+        <div id="next-candidates-wrap">
+            <fieldset id="next-candidates"><legend align="left">Next (click to vote)</legend>
+                {% for candidate in candidates %}
+                    <a href="{% url vote pk=candidate.id%}"><div class="candidate">&#x{{candidate.char.char}};</div></a>
+                {% endfor %}
+            </fieldset>
+        </div>
+    {% endif %}
+    {% if voted_for %}
+        <div id="next-candidates-wrap">
+            <fieldset id="next-candidates"><legend align="left">You voted for:</legend>
+                <div class="candidate">&#x{{voted_for.char.char}};</div>
+            </fieldset>
+        </div>
+    {% endif %}
     <div id="char-wrap">
         <h2>{{object.char.desc|lower}}</h2>
         <h1 id="char">&#x{{object.char.char}};</h1>
