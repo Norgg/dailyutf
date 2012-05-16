@@ -52,7 +52,7 @@ class CharFeed(Feed):
         return item.char.desc
 
     def item_description(self, item):
-        return unicode("<p>%s<br/>%s</p>" % (item.char.desc,item.char))
+        return unicode("<p>%s<br/>%s</p><p>Vote for the next character <a href='http://thedailyutf.com'>here</a>.</p>" % (item.char.desc,item.char))
 
 def json(request):
     item = DailyChar.current()
