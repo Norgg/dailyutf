@@ -105,8 +105,8 @@
         <h1 id="char">&#x{{object.char.char}};</h1>
         <div id="error"></div>
     </div><br/>
-    <canvas id="c1" width=128 height=128></canvas>
-    <canvas id="c2" width=128 height=128></canvas>
+    <canvas id="c1" width=64 height=64></canvas>
+    <canvas id="c2" width=64 height=64></canvas>
     <div id="ads-wrap">
         <fieldset id="ads"><legend align="left">Ads</legend>
             <script type="text/javascript"><!--
@@ -123,22 +123,32 @@
     </div>
 
 <script>
-    c1 = document.getElementById('c1');
-    ctx1 = c1.getContext('2d');
-    c2 = document.getElementById('c2');
-    ctx2 = c2.getContext('2d');
+    var c1 = document.getElementById('c1');
+    var ctx1 = c1.getContext('2d');
+    var c2 = document.getElementById('c2');
+    var ctx2 = c2.getContext('2d');
 
-    ctx1.font = ctx2.font = "32pt sans-serif";
+    ctx1.font = ctx2.font = "24pt sans-serif";
     
-    char1 = String.fromCharCode(parseInt("{{object.char.char}}", 16));
-    char2 = String.fromCharCode(parseInt("10FFFF", 16));
+    var char1 = String.fromCharCode(parseInt("{{object.char.char}}", 16));
+    var char2 = String.fromCharCode(parseInt("10FFFF", 16));
 
-    ctx1.fillText(char1, 64-ctx1.measureText(char1).width/2, 64);
-    ctx2.fillText(char2, 64-ctx2.measureText(char2).width/2, 64);
-    data1 = c1.toDataURL();
-    data2 = c2.toDataURL();
+    ctx1.fillText(char1, 32-ctx1.measureText(char1).width/2, 42);
+    ctx2.fillText(char2, 32-ctx2.measureText(char2).width/2, 42);
+    ctx1.strokeRect(0, 0, 63, 63);
+    ctx2.strokeRect(0, 0, 63, 63);
+    var data1 = c1.toDataURL();
+    var data2 = c2.toDataURL();
     if(data1 == data2) {
         document.getElementById('error').innerHTML = "Sorry, looks like your font doesn't support this character.";
+    }
+    //Favicon
+    window.onload = function() {
+        var link = document.createElement('link');
+        link.type = 'image/x-icon';
+        link.rel = 'shortcut icon';
+        link.href = data1;
+        document.getElementsByTagName('head')[0].appendChild(link);
     }
 </script>
 </body>
