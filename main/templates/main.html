@@ -52,6 +52,11 @@
     #rss a {
         color: #eee;
     }
+    #ads {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+    }
 </style>
 <link rel="alternate" type="application/rss+xml" title="The Daily UTF RSS" href="{% url feed %}"/>
 
@@ -93,25 +98,35 @@
     </div><br/>
     <canvas id="c1" width=128 height=128></canvas>
     <canvas id="c2" width=128 height=128></canvas>
+    <script type="text/javascript"><!--
+        google_ad_client = "ca-pub-1303458894757671";
+        /* tdutf ads */
+        google_ad_slot = "4182223657";
+        google_ad_width = 200;
+        google_ad_height = 200;
+        //-->
+    </script>
+    <script type="text/javascript"
+        src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+    <script>
+        c1 = document.getElementById('c1');
+        ctx1 = c1.getContext('2d');
+        c2 = document.getElementById('c2');
+        ctx2 = c2.getContext('2d');
 
-<script>
-    c1 = document.getElementById('c1');
-    ctx1 = c1.getContext('2d');
-    c2 = document.getElementById('c2');
-    ctx2 = c2.getContext('2d');
+        ctx1.font = ctx2.font = "32pt sans-serif";
+        
+        char1 = String.fromCharCode(parseInt("{{object.char.char}}", 16));
+        char2 = String.fromCharCode(parseInt("10FFFF", 16));
 
-    ctx1.font = ctx2.font = "32pt sans-serif";
-    
-    char1 = String.fromCharCode(parseInt("{{object.char.char}}", 16));
-    char2 = String.fromCharCode(parseInt("10FFFF", 16));
-
-    ctx1.fillText(char1, 64-ctx1.measureText(char1).width/2, 64);
-    ctx2.fillText(char2, 64-ctx2.measureText(char2).width/2, 64);
-    data1 = c1.toDataURL();
-    data2 = c2.toDataURL();
-    if(data1 == data2) {
-        document.getElementById('error').innerHTML = "Sorry, looks like your font doesn't support this character.";
-    }
-</script>
+        ctx1.fillText(char1, 64-ctx1.measureText(char1).width/2, 64);
+        ctx2.fillText(char2, 64-ctx2.measureText(char2).width/2, 64);
+        data1 = c1.toDataURL();
+        data2 = c2.toDataURL();
+        if(data1 == data2) {
+            document.getElementById('error').innerHTML = "Sorry, looks like your font doesn't support this character.";
+        }
+    </script>
 </body>
 </html>
