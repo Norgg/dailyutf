@@ -6,9 +6,9 @@
     #char-wrap {
         display: inline-block;
         margin: 100px auto;
-        border: 1px solid #aaa;
+        border: 1px solid #a0a0a0;
         padding: 10px;
-        background: #eee;
+        background: #e0e0e0;
         border-radius: 10px;
         width: 400px;
     }
@@ -23,7 +23,7 @@
     }
     #next-candidates {
         border: 1px solid white;
-        background: #113;
+        background: #101030;
         color: white;
         border-radius: 5px;
     }
@@ -34,7 +34,7 @@
     .candidate {
         margin: 5px auto;
         border: 2px solid #ccc;
-        background: #bbb;
+        background: #b0b0b0;
         width: 50px;
         font-size: 200%;
         color: #000022;
@@ -44,18 +44,27 @@
         left: 20px;
         top: 20px;
         border: 1px solid white;
-        background: #113;
+        background: #101030;
         border-radius: 5px;
         width: 50px;
         margin-top: 5px;
     }
     #rss a {
-        color: #eee;
+        color: #e0e0e0;
     }
-    #ads {
+    #ads-wrap {
         position: fixed;
         right: 20px;
         bottom: 20px;
+    }
+    #ads {
+        border: 1px solid white;
+        border-radius: 5px;
+        color: white;
+        background: #101030;
+    }
+    #ads legend {
+        color: white;
     }
 </style>
 <link rel="alternate" type="application/rss+xml" title="The Daily UTF RSS" href="{% url feed %}"/>
@@ -98,35 +107,39 @@
     </div><br/>
     <canvas id="c1" width=128 height=128></canvas>
     <canvas id="c2" width=128 height=128></canvas>
-    <script type="text/javascript"><!--
-        google_ad_client = "ca-pub-1303458894757671";
-        /* tdutf ads */
-        google_ad_slot = "4182223657";
-        google_ad_width = 200;
-        google_ad_height = 200;
-        //-->
-    </script>
-    <script type="text/javascript"
-        src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-    </script>
-    <script>
-        c1 = document.getElementById('c1');
-        ctx1 = c1.getContext('2d');
-        c2 = document.getElementById('c2');
-        ctx2 = c2.getContext('2d');
+    <div id="ads-wrap">
+        <fieldset id="ads"><legend align="left">Ads</legend>
+            <script type="text/javascript"><!--
+                google_ad_client = "ca-pub-1303458894757671";
+                /* tdutf ads */
+                google_ad_slot = "4182223657";
+                google_ad_width = 200;
+                google_ad_height = 200;
+                //-->
+            </script>
+            <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+            </script>
+        </fieldset>
+    </div>
 
-        ctx1.font = ctx2.font = "32pt sans-serif";
-        
-        char1 = String.fromCharCode(parseInt("{{object.char.char}}", 16));
-        char2 = String.fromCharCode(parseInt("10FFFF", 16));
+<script>
+    c1 = document.getElementById('c1');
+    ctx1 = c1.getContext('2d');
+    c2 = document.getElementById('c2');
+    ctx2 = c2.getContext('2d');
 
-        ctx1.fillText(char1, 64-ctx1.measureText(char1).width/2, 64);
-        ctx2.fillText(char2, 64-ctx2.measureText(char2).width/2, 64);
-        data1 = c1.toDataURL();
-        data2 = c2.toDataURL();
-        if(data1 == data2) {
-            document.getElementById('error').innerHTML = "Sorry, looks like your font doesn't support this character.";
-        }
-    </script>
+    ctx1.font = ctx2.font = "32pt sans-serif";
+    
+    char1 = String.fromCharCode(parseInt("{{object.char.char}}", 16));
+    char2 = String.fromCharCode(parseInt("10FFFF", 16));
+
+    ctx1.fillText(char1, 64-ctx1.measureText(char1).width/2, 64);
+    ctx2.fillText(char2, 64-ctx2.measureText(char2).width/2, 64);
+    data1 = c1.toDataURL();
+    data2 = c2.toDataURL();
+    if(data1 == data2) {
+        document.getElementById('error').innerHTML = "Sorry, looks like your font doesn't support this character.";
+    }
+</script>
 </body>
 </html>
